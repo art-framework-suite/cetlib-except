@@ -35,7 +35,8 @@ cet_report_compiler_flags(REPORT_THRESHOLD VERBOSE)
 # ----------------------------------------------------------------------
 # Describe source tree layout:
 
-add_subdirectory( ${PROJECT_NAME} )  # source code
+add_subdirectory(${PROJECT_NAME}) # source code
+add_subdirectory(docs)
 
 # ----------------------------------------------------------------------
 # Documentation generation:

@@ -38,6 +38,11 @@ cet_report_compiler_flags(REPORT_THRESHOLD VERBOSE)
 add_subdirectory( ${PROJECT_NAME} )  # source code
 
 # ----------------------------------------------------------------------
+# Documentation generation:
+#find_package(Sphinx REQUIRED)
+add_subdirectory( docs )              # docs files
+
+# ----------------------------------------------------------------------
 # Packaging utility
 
 

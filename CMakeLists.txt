@@ -36,12 +36,11 @@ cet_report_compiler_flags(REPORT_THRESHOLD VERBOSE)
 # Describe source tree layout:
 
 add_subdirectory(${PROJECT_NAME}) # source code
-add_subdirectory(docs)
 
 # ----------------------------------------------------------------------
 # Documentation generation:
 #find_package(Sphinx REQUIRED)
-add_subdirectory( docs )              # docs files
+add_subdirectory(docs)
 
 # ----------------------------------------------------------------------
 # Packaging utility

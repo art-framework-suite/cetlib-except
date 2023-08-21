@@ -15,6 +15,7 @@ namespace {
     return os << s.i;
   }
   struct UnStreamable {};
+
   template <typename T>
   concept can_append_to_exception =
     requires(cet::exception&& e, T const& t) { e.append(t); };
@@ -22,6 +23,6 @@ namespace {
 
 TEST_CASE("Ensure streamable exception append")
 {
-  REQUIRE(can_append_to_exception<Streamable>);
-  REQUIRE_FALSE(can_append_to_exception<UnStreamable>);
+  CHECK(can_append_to_exception<Streamable>);
+  CHECK_FALSE(can_append_to_exception<UnStreamable>);
 }

@@ -31,7 +31,7 @@ html = "@SPHINX_HTML_DIR@"
 
 if(not html):
     print("You haven't set an install dir ($HTML_DIR). Please set one and try again.")
-    sys.exit() 
+    sys.exit()
 
 def dotted_version(normal_version):
     return normal_version.lstrip('v').replace('_', '.')
@@ -207,14 +207,14 @@ rst_epilog = """
 #print("+++++++++++++++++++++++\n\n\n\n\n")
 
 
-products = 0 
+products = 0
 depends_on = []
 
 with open(src+'/'+project+'/ups/product_deps') as deps_file:
   for line in deps_file:
     val = line.split()
     if(not val): continue
-    if(val[0] == 'end_product_list'): products = 0 
+    if(val[0] == 'end_product_list'): products = 0
     # product list
     if(products):
       item = [val[0], val[1]]
@@ -254,16 +254,16 @@ with open(src+'/'+project+'/docs/depends.rst', 'w+') as deps_page:
 #   - The goal here is to mimick the functionality of the redmine release notes with a couple tweaks.
 #   - We probably do not want (for example) every series-notes link on the art 3.02(.02) documentation.
 #   - We would just want the art 3.02 series and then maybe the .02 release notes. Or combine them.
-#   - 
+#   -
 #   - The release-notes perl script gives us good template information (w/ redmine style) - ideally we want
 #   - much of that templating to get dumped into rst files at build time. We also want to give a document-er
 #   - the ability to put in notes manually that will not get erased at build time.
-#   - 
-#   - dumb idea for now is have placeholder flags in the release-notes output written to an rst file. 
+#   -
+#   - dumb idea for now is have placeholder flags in the release-notes output written to an rst file.
 #   - have a user written rst file that inserts relevant information in placeholders. something like that.
 
 
-# --- release notes stuff 
+# --- release notes stuff
 
 proj_docs_dir = src + '/' + project + '/docs/'
 #series_release_notes_command = 'perl /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/docs/release-notes --series-notes ' + project + ' ' + release + ' > /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/docs/series_temp.rst'
@@ -271,7 +271,7 @@ proj_docs_dir = src + '/' + project + '/docs/'
 series_release_notes_command = "perl " + proj_docs_dir + "release-notes --series-notes " + project + ' ' + release
 #suite_release_notes_command = "perl " + proj_docs_dir + "release-notes --suite-notes " + project + ' ' + release
 suite_release_notes_command = "perl " + proj_docs_dir + "release-notes " + project + ' ' + release
- 
+
 os.system(series_release_notes_command + ' > ' + src + '/' + project + '/docs/series_temp.rst')
 os.system(suite_release_notes_command + ' > ' + src + '/' + project + '/docs/suite_temp.rst')
 os.system('cat ' + src + '/' + project + '/docs/series_temp.rst ' + src + '/' + project + '/docs/suite_temp.rst > ' + src + '/' + project + '/docs/temp.rst')
@@ -302,7 +302,7 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
                         #print(feature_line)
                         final_notes.write(feature_line)
 
-            # Other 
+            # Other
             if("Other" in line):
                 #print("\t\tinsert stuff here")
                 with open(src + '/' + project + '/docs/series_notes/other.rst') as other_page:
@@ -310,7 +310,7 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
                         #print(other_line)
                         final_notes.write(other_line)
 
-            # breaking changes 
+            # breaking changes
             if("Breaking changes" in line):
                 #print("\t\tinsert stuff here")
                 with open(src + '/' + project + '/docs/series_notes/breaking_changes.rst') as changes_page:
@@ -320,21 +320,21 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
 
             # Suite Notes here:
 
-            # external package changes 
+            # external package changes
             if("package changes" in line):
                 with open(src + '/' + project + '/docs/suite_notes/ext_package_changes.rst') as pkg_page:
                     for pkg_line in pkg_page:
                         #print(pkg_line)
                         final_notes.write(pkg_line)
 
-            # bug fixes 
+            # bug fixes
             if("Bug fixes" in line):
                 with open(src + '/' + project + '/docs/suite_notes/bug_fixes.rst') as bug_page:
                     for bug_line in bug_page:
                         #print(bug_line)
                         final_notes.write(bug_line)
 
-            # known issues 
+            # known issues
             if("Known issues" in line):
                 with open(src + '/' + project + '/docs/suite_notes/known_issues.rst') as issue_page:
                     for issue_line in issue_page:
@@ -343,22 +343,5 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
 
             # errything else
             else: final_notes.write(line)
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # eof

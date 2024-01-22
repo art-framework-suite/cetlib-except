@@ -27,7 +27,7 @@ author = 'artists'
 # more general stuff
 src = os.environ['MRB_SOURCE']
 top = os.environ['MRB_TOP']
-html = os.environ['HTML_DIR']#+'/'project
+html = "@SPHINX_HTML_DIR@"
 
 if(not html):
     print("You haven't set an install dir ($HTML_DIR). Please set one and try again.")
@@ -44,7 +44,7 @@ release = dotted_version('@version@')
 # Assemble list of already-built documentation that will appear in the
 # versions drop-down menu.
 built_docs_path = top+'/all_docs/'+project
-install_docs_path = html+'/'+project 
+install_docs_path = html#+'/'+project
 
 print("Building ", project, " html files..\n")
 files = os.listdir(install_docs_path)
@@ -87,7 +87,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -190,13 +190,13 @@ texinfo_documents = [
 # -- Extension configuration -------------------------------------------------
 fnal_redmine_url = 'https://cdcvs.fnal.gov/redmine/'
 def setup(app):
-    app.add_stylesheet('artdoc.css')
+    app.add_css_file('artdoc.css')
     #app.add_stylesheet('_static/artdoc.css')
 
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+# intersphinx_mapping = {'https://docs.python.org/': None}
 
 rst_epilog = """
 .. |release| replace:: *{projname}* {versionnum}

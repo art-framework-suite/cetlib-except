@@ -39,8 +39,10 @@ add_subdirectory(${PROJECT_NAME}) # source code
 
 # ----------------------------------------------------------------------
 # Documentation generation:
-#find_package(Sphinx REQUIRED)
-add_subdirectory(docs)
+
+if (BUILD_DOCS)
+  add_subdirectory(docs)
+endif()
 
 # ----------------------------------------------------------------------
 # Packaging utility

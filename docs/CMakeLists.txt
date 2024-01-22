@@ -1,4 +1,4 @@
-find_package(Sphinx REQUIRED)
+find_package(sphinx-doc REQUIRED)
  
 if(NOT DEFINED SPHINX_THEME)
     set(SPHINX_THEME default)
@@ -102,10 +102,8 @@ configure_file(
     "${BINARY_BUILD_DIR}/conf.py"
     @ONLY)
 
-message(STATUS "SPHINX_EXECUTABLE: ${SPHINX_EXECUTABLE}")
-
 add_custom_target(cetlib_except_docs ALL
-  ${SPHINX_EXECUTABLE}
+  sphinx-doc::sphinx-build
   -q -b html
   -c "${BINARY_BUILD_DIR}"
   -d "${SPHINX_CACHE_DIR}"

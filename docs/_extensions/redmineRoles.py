@@ -76,7 +76,7 @@ def make_link_node(rawtext, app, type, spec, options):
     slash = '/' if base[-1] != '/' else ''
     ref = base + slash
     prefix = str()
-    if type is 'source':
+    if type == 'source':
         version = 'v' + release.replace('.', '_')
         #ref += 'projects/cetlib/repository/entry/'
         ref += 'projects/cetlib_except/repository/entry/'
@@ -85,7 +85,7 @@ def make_link_node(rawtext, app, type, spec, options):
         ref += u'\u2713'
         ref += '&rev='
         ref += version
-    elif type is 'issue':
+    elif type == 'issue':
         ref += 'issues/'
         ref += str(spec)
         prefix = '#'

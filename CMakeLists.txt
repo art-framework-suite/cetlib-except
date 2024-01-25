@@ -41,7 +41,7 @@ add_subdirectory(${PROJECT_NAME}) # source code
 # Documentation generation:
 
 if (BUILD_DOCS)
-  add_subdirectory(docs)
+  add_subdirectory(doc)
 endif()
 
 # ----------------------------------------------------------------------

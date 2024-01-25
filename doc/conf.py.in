@@ -222,7 +222,7 @@ with open(src+'/'+project+'/ups/product_deps') as deps_file:
     if(val[0] == 'product'): products = 1
 
 
-with open(src+'/'+project+'/docs/depends.rst', 'w+') as deps_page:
+with open(src+'/'+project+'/doc/depends.rst', 'w+') as deps_page:
   deps_page.write(':orphan:\n\n')
   deps_page.write('|release| depends on')
   deps_page.write('\n====================\n')
@@ -265,22 +265,22 @@ with open(src+'/'+project+'/docs/depends.rst', 'w+') as deps_page:
 
 # --- release notes stuff
 
-proj_docs_dir = src + '/' + project + '/docs/'
-#series_release_notes_command = 'perl /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/docs/release-notes --series-notes ' + project + ' ' + release + ' > /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/docs/series_temp.rst'
-#suite_release_notes_command = 'perl /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/docs/release-notes --suite-notes ' + project + ' ' + release + ' > /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/docs/suite_temp.rst'
+proj_docs_dir = src + '/' + project + '/doc/'
+#series_release_notes_command = 'perl /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/doc/release-notes --series-notes ' + project + ' ' + release + ' > /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/doc/series_temp.rst'
+#suite_release_notes_command = 'perl /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/doc/release-notes --suite-notes ' + project + ' ' + release + ' > /home/ryan/Documents/fermilab/work/doc_devel/srcs/art/doc/suite_temp.rst'
 series_release_notes_command = "perl " + proj_docs_dir + "release-notes --series-notes " + project + ' ' + release
 #suite_release_notes_command = "perl " + proj_docs_dir + "release-notes --suite-notes " + project + ' ' + release
 suite_release_notes_command = "perl " + proj_docs_dir + "release-notes " + project + ' ' + release
 
-os.system(series_release_notes_command + ' > ' + src + '/' + project + '/docs/series_temp.rst')
-os.system(suite_release_notes_command + ' > ' + src + '/' + project + '/docs/suite_temp.rst')
-os.system('cat ' + src + '/' + project + '/docs/series_temp.rst ' + src + '/' + project + '/docs/suite_temp.rst > ' + src + '/' + project + '/docs/temp.rst')
+os.system(series_release_notes_command + ' > ' + src + '/' + project + '/doc/series_temp.rst')
+os.system(suite_release_notes_command + ' > ' + src + '/' + project + '/doc/suite_temp.rst')
+os.system('cat ' + src + '/' + project + '/doc/series_temp.rst ' + src + '/' + project + '/doc/suite_temp.rst > ' + src + '/' + project + '/doc/temp.rst')
 
 #print("looking at formatting the releasenotes as a combo of automated and user notes")
 
-#with open("/home/ryan/Documents/fermilab/work/doc_devel/srcs/art/docs/temp.rst", "r+") as notes_page:
-with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
-    with open(src + '/' + project + '/docs/temp.rst', "r+") as auto_notes:
+#with open("/home/ryan/Documents/fermilab/work/doc_devel/srcs/art/doc/temp.rst", "r+") as notes_page:
+with open(src + '/' + project + '/doc/releaseNotes.rst', "w") as final_notes:
+    with open(src + '/' + project + '/doc/temp.rst', "r+") as auto_notes:
         for line in auto_notes:
             #print(line)
 
@@ -289,7 +289,7 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
             # general description
             if("description of series" in line):
                 #print("\t\tinsert stuff here")
-                with open(src + '/' + project + '/docs/series_notes/general_description.rst') as description_page:
+                with open(src + '/' + project + '/doc/series_notes/general_description.rst') as description_page:
                     for description_line in description_page:
                         #print(description_line)
                         final_notes.write(description_line)
@@ -297,7 +297,7 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
             # new features
             if("New features" in line):
                 #print("\t\tinsert stuff here")
-                with open(src + '/' + project + '/docs/series_notes/new_features.rst') as feature_page:
+                with open(src + '/' + project + '/doc/series_notes/new_features.rst') as feature_page:
                     for feature_line in feature_page:
                         #print(feature_line)
                         final_notes.write(feature_line)
@@ -305,7 +305,7 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
             # Other
             if("Other" in line):
                 #print("\t\tinsert stuff here")
-                with open(src + '/' + project + '/docs/series_notes/other.rst') as other_page:
+                with open(src + '/' + project + '/doc/series_notes/other.rst') as other_page:
                     for other_line in other_page:
                         #print(other_line)
                         final_notes.write(other_line)
@@ -313,7 +313,7 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
             # breaking changes
             if("Breaking changes" in line):
                 #print("\t\tinsert stuff here")
-                with open(src + '/' + project + '/docs/series_notes/breaking_changes.rst') as changes_page:
+                with open(src + '/' + project + '/doc/series_notes/breaking_changes.rst') as changes_page:
                     for changes_line in changes_page:
                         #print(changes_line)
                         final_notes.write(changes_line)
@@ -322,21 +322,21 @@ with open(src + '/' + project + '/docs/releaseNotes.rst', "w") as final_notes:
 
             # external package changes
             if("package changes" in line):
-                with open(src + '/' + project + '/docs/suite_notes/ext_package_changes.rst') as pkg_page:
+                with open(src + '/' + project + '/doc/suite_notes/ext_package_changes.rst') as pkg_page:
                     for pkg_line in pkg_page:
                         #print(pkg_line)
                         final_notes.write(pkg_line)
 
             # bug fixes
             if("Bug fixes" in line):
-                with open(src + '/' + project + '/docs/suite_notes/bug_fixes.rst') as bug_page:
+                with open(src + '/' + project + '/doc/suite_notes/bug_fixes.rst') as bug_page:
                     for bug_line in bug_page:
                         #print(bug_line)
                         final_notes.write(bug_line)
 
             # known issues
             if("Known issues" in line):
-                with open(src + '/' + project + '/docs/suite_notes/known_issues.rst') as issue_page:
+                with open(src + '/' + project + '/doc/suite_notes/known_issues.rst') as issue_page:
                     for issue_line in issue_page:
                         #print(issue_line)
                         final_notes.write(issue_line)

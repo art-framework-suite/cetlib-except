@@ -1,0 +1,36 @@
+#######################
+Reference Documentation
+#######################
+
+Programs and Scripts
+====================
+
+.. toctree::
+   :maxdepth: 1
+
+
+API Reference
+=================
+
+.. toctree::
+   :maxdepth: 1
+
+   api.rst
+
+.. only:: html
+
+   Other Documentation
+   ===================
+
+   .. button-link:: ../
+      :expand:
+      :outline:
+      :color: primary
+
+      |project| Documentation
+
+   Index and Search
+   ================
+
+   * :ref:`genindex`
+   * :ref:`search`

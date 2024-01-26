@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cetlib-except API &mdash; cetlib-except git-develop-729024c Reference</title>
+
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/FNALssi-cpp.css?v=a5f04161" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+
+  
+    <link rel="shortcut icon" href="_static/FNALssi-favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=9c625414"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Reference Documentation" href="index.html" />
+  
+  <script type="text/javascript" src="../_static/version_switch.js"></script>
+  
+ 
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cetlib-except
+          </a>
+              <div class="version">
+                git-develop
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">cetlib-except API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv43cet"><code class="docutils literal notranslate"><span class="pre">cet</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N3cetlsERNSt7ostreamERK9exception"><code class="docutils literal notranslate"><span class="pre">cet::operator&lt;&lt;()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1ERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">cet::operator&lt;&lt;()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EA_Kc"><code class="docutils literal notranslate"><span class="pre">cet::operator&lt;&lt;()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt7ostreamERNSt7ostreamEE"><code class="docutils literal notranslate"><span class="pre">cet::operator&lt;&lt;()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt8ios_baseERNSt8ios_baseEE"><code class="docutils literal notranslate"><span class="pre">cet::operator&lt;&lt;()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionE0EN3cetlsERR1ERR1ERK1T"><code class="docutils literal notranslate"><span class="pre">cet::operator&lt;&lt;()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N3cet9exceptionE"><code class="docutils literal notranslate"><span class="pre">cet::exception</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception8CategoryE"><code class="docutils literal notranslate"><span class="pre">cet::exception::Category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception12CategoryListE"><code class="docutils literal notranslate"><span class="pre">cet::exception::CategoryList</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception9exceptionERK8Category"><code class="docutils literal notranslate"><span class="pre">cet::exception::exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception9exceptionERK8CategoryRKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">cet::exception::exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception9exceptionERK8CategoryRKNSt6stringERK9exception"><code class="docutils literal notranslate"><span class="pre">cet::exception::exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception9exceptionERK9exception"><code class="docutils literal notranslate"><span class="pre">cet::exception::exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exceptionD0Ev"><code class="docutils literal notranslate"><span class="pre">cet::exception::~exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK3cet9exception4whatEv"><code class="docutils literal notranslate"><span class="pre">cet::exception::what()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK3cet9exception12explain_selfEv"><code class="docutils literal notranslate"><span class="pre">cet::exception::explain_self()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK3cet9exception8categoryEv"><code class="docutils literal notranslate"><span class="pre">cet::exception::category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK3cet9exception7historyEv"><code class="docutils literal notranslate"><span class="pre">cet::exception::history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK3cet9exception10root_causeEv"><code class="docutils literal notranslate"><span class="pre">cet::exception::root_cause()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception6appendERK9exception"><code class="docutils literal notranslate"><span class="pre">cet::exception::append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception6appendERKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">cet::exception::append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception6appendEA_Kc"><code class="docutils literal notranslate"><span class="pre">cet::exception::append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception6appendEFRNSt7ostreamERNSt7ostreamEE"><code class="docutils literal notranslate"><span class="pre">cet::exception::append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception6appendEFRNSt8ios_baseERNSt8ios_baseEE"><code class="docutils literal notranslate"><span class="pre">cet::exception::append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4I_N6detail10StreamableEEN3cet9exception6appendEvRK1T"><code class="docutils literal notranslate"><span class="pre">cet::exception::append()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception4ost_E"><code class="docutils literal notranslate"><span class="pre">cet::exception::ost_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception9category_E"><code class="docutils literal notranslate"><span class="pre">cet::exception::category_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet9exception5what_E"><code class="docutils literal notranslate"><span class="pre">cet::exception::what_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N3cet6detailE"><code class="docutils literal notranslate"><span class="pre">cet::detail</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet15coded_exception15coded_exceptionE4Code"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::coded_exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringE"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::coded_exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringERK9exception"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::coded_exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet15coded_exceptionD0Ev"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::~coded_exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK3cet15coded_exception12categoryCodeEv"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::categoryCode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4NK3cet15coded_exception10returnCodeEv"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::returnCode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet15coded_exception12codeToStringE4Code"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::codeToString()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#_CPPv4N3cet15coded_exception9category_E"><code class="docutils literal notranslate"><span class="pre">cet::coded_exception::category_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cetlib-except</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">cetlib-except API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="project-api">
+<h1>cetlib-except API<a class="headerlink" href="#project-api" title="Link to this heading"></a></h1>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv43cet">
+<span id="_CPPv33cet"></span><span id="_CPPv23cet"></span><span id="cet"></span><span class="target" id="namespacecet"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cet</span></span></span><a class="headerlink" href="#_CPPv43cet" title="Link to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cetlsERNSt7ostreamERK9exception">
+<span id="_CPPv3N3cetlsERNSt7ostreamERK9exception"></span><span id="_CPPv2N3cetlsERNSt7ostreamERK9exception"></span><span id="cet::lshift-operator__osR.exceptionCR"></span><span class="target" id="namespacecet_1a02637dc843f3ce704bb26c7394eb71f5"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">os</span></span>, <a class="reference internal" href="#_CPPv4N3cet9exceptionE" title="cet::exception"><span class="n"><span class="pre">exception</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cetlsERNSt7ostreamERK9exception" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1ERKNSt6stringE">
+<span id="_CPPv3I_N6detail13cet_exceptionEEN3cetlsERR1ERKNSt6stringE"></span><span id="_CPPv2I_N6detail13cet_exceptionEEN3cetlsERR1ERKNSt6stringE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3cet6detailE" title="cet::detail"><span class="n"><span class="pre">detail</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cet_exception</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">E</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacecet_1a07f7959297a470b0533543dacc175757"></span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1ERKNSt6stringE" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1ERKNSt6stringE" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1ERKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EA_Kc">
+<span id="_CPPv3I_N6detail13cet_exceptionEEN3cetlsERR1EA_Kc"></span><span id="_CPPv2I_N6detail13cet_exceptionEEN3cetlsERR1EA_Kc"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3cet6detailE" title="cet::detail"><span class="n"><span class="pre">detail</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cet_exception</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">E</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacecet_1a6ef48ed232264a8968d7e8517ac7fc61"></span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EA_Kc" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EA_Kc" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">t</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EA_Kc" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt7ostreamERNSt7ostreamEE">
+<span id="_CPPv3I_N6detail13cet_exceptionEEN3cetlsERR1EFRNSt7ostreamERNSt7ostreamEE"></span><span id="_CPPv2I_N6detail13cet_exceptionEEN3cetlsERR1EFRNSt7ostreamERNSt7ostreamEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3cet6detailE" title="cet::detail"><span class="n"><span class="pre">detail</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cet_exception</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">E</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacecet_1a2a44f06297ea36238ad8073b2f0680dc"></span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt7ostreamERNSt7ostreamEE" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt7ostreamERNSt7ostreamEE" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt7ostreamERNSt7ostreamEE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt8ios_baseERNSt8ios_baseEE">
+<span id="_CPPv3I_N6detail13cet_exceptionEEN3cetlsERR1EFRNSt8ios_baseERNSt8ios_baseEE"></span><span id="_CPPv2I_N6detail13cet_exceptionEEN3cetlsERR1EFRNSt8ios_baseERNSt8ios_baseEE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3cet6detailE" title="cet::detail"><span class="n"><span class="pre">detail</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cet_exception</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">E</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacecet_1a6fa3ba0625fa22045aa02aefc32aa55c"></span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt8ios_baseERNSt8ios_baseEE" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt8ios_baseERNSt8ios_baseEE" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ios_base</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ios_base</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_N6detail13cet_exceptionEEN3cetlsERR1ERR1EFRNSt8ios_baseERNSt8ios_baseEE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_N6detail13cet_exceptionE0EN3cetlsERR1ERR1ERK1T">
+<span id="_CPPv3I_N6detail13cet_exceptionE0EN3cetlsERR1ERK1T"></span><span id="_CPPv2I_N6detail13cet_exceptionE0EN3cetlsERR1ERK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3cet6detailE" title="cet::detail"><span class="n"><span class="pre">detail</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">cet_exception</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">E</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacecet_1af079620c3db504175df2ccafc4cbc881"></span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionE0EN3cetlsERR1ERR1ERK1T" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionE0EN3cetlsERR1ERR1ERK1T" title="cet::operator&lt;&lt;::E"><span class="n"><span class="pre">E</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span>, <a class="reference internal" href="#_CPPv4I_N6detail13cet_exceptionE0EN3cetlsERR1ERR1ERK1T" title="cet::operator&lt;&lt;::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">t</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_N6detail13cet_exceptionE0EN3cetlsERR1ERR1ERK1T" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exceptionE">
+<span id="_CPPv3N3cet9exceptionE"></span><span id="_CPPv2N3cet9exceptionE"></span><span id="cet::exception"></span><span class="target" id="classcet_1_1exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">exception</span></span><a class="headerlink" href="#_CPPv4N3cet9exceptionE" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>Subclassed by <a class="reference internal" href="#classcet_1_1coded__exception"><span class="std std-ref">cet::coded_exception&lt; Code, translate &gt;</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception8CategoryE">
+<span id="_CPPv3N3cet9exception8CategoryE"></span><span id="_CPPv2N3cet9exception8CategoryE"></span><span class="target" id="classcet_1_1exception_1a89886d072933529580933e4a297f2a8b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Category</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><a class="headerlink" href="#_CPPv4N3cet9exception8CategoryE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception12CategoryListE">
+<span id="_CPPv3N3cet9exception12CategoryListE"></span><span id="_CPPv2N3cet9exception12CategoryListE"></span><span class="target" id="classcet_1_1exception_1af2ac806443689d94784087ac33af9b0f"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CategoryList</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">list</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3cet9exception8CategoryE" title="cet::exception::Category"><span class="n"><span class="pre">Category</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N3cet9exception12CategoryListE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception9exceptionERK8Category">
+<span id="_CPPv3N3cet9exception9exceptionERK8Category"></span><span id="_CPPv2N3cet9exception9exceptionERK8Category"></span><span id="cet::exception::exception__CategoryCR"></span><span class="target" id="classcet_1_1exception_1a4dba41a8f1e06bd03926780702a0f1d6"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3cet9exception8CategoryE" title="cet::exception::Category"><span class="n"><span class="pre">Category</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">category</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception9exceptionERK8Category" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception9exceptionERK8CategoryRKNSt6stringE">
+<span id="_CPPv3N3cet9exception9exceptionERK8CategoryRKNSt6stringE"></span><span id="_CPPv2N3cet9exception9exceptionERK8CategoryRKNSt6stringE"></span><span id="cet::exception::exception__CategoryCR.ssCR"></span><span class="target" id="classcet_1_1exception_1a65d0c4a3709979d8f7170ac952e4eb5b"></span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3cet9exception8CategoryE" title="cet::exception::Category"><span class="n"><span class="pre">Category</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">category</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">message</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception9exceptionERK8CategoryRKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception9exceptionERK8CategoryRKNSt6stringERK9exception">
+<span id="_CPPv3N3cet9exception9exceptionERK8CategoryRKNSt6stringERK9exception"></span><span id="_CPPv2N3cet9exception9exceptionERK8CategoryRKNSt6stringERK9exception"></span><span id="cet::exception::exception__CategoryCR.ssCR.exceptionCR"></span><span class="target" id="classcet_1_1exception_1a514af2da58109753521675edd827621d"></span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3cet9exception8CategoryE" title="cet::exception::Category"><span class="n"><span class="pre">Category</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">category</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">message</span></span>, <a class="reference internal" href="#_CPPv4N3cet9exception9exceptionERK8CategoryRKNSt6stringERK9exception" title="cet::exception::exception"><span class="n"><span class="pre">exception</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">another</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception9exceptionERK8CategoryRKNSt6stringERK9exception" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception9exceptionERK9exception">
+<span id="_CPPv3N3cet9exception9exceptionERK9exception"></span><span id="_CPPv2N3cet9exception9exceptionERK9exception"></span><span id="cet::exception::exception__exceptionCR"></span><span class="target" id="classcet_1_1exception_1af791a7a2df7a0b39e23add306b8200e8"></span><span class="sig-name descname"><span class="n"><span class="pre">exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3cet9exception9exceptionERK9exception" title="cet::exception::exception"><span class="n"><span class="pre">exception</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">other</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3cet9exception9exceptionERK9exception" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exceptionD0Ev">
+<span id="_CPPv3N3cet9exceptionD0Ev"></span><span id="_CPPv2N3cet9exceptionD0Ev"></span><span id="cet::exception::~exception"></span><span class="target" id="classcet_1_1exception_1a1c17ab42d671d14d47fe27b86b1e5285"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~exception</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4N3cet9exceptionD0Ev" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3cet9exception4whatEv">
+<span id="_CPPv3NK3cet9exception4whatEv"></span><span id="_CPPv2NK3cet9exception4whatEv"></span><span id="cet::exception::whatC"></span><span class="target" id="classcet_1_1exception_1aca0a79560a5c5aa21a77068daebff6e8"></span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">what</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3cet9exception4whatEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3cet9exception12explain_selfEv">
+<span id="_CPPv3NK3cet9exception12explain_selfEv"></span><span id="_CPPv2NK3cet9exception12explain_selfEv"></span><span id="cet::exception::explain_selfC"></span><span class="target" id="classcet_1_1exception_1a7e8d252fdce704cc2336112e1ad19e90"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">explain_self</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3cet9exception12explain_selfEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3cet9exception8categoryEv">
+<span id="_CPPv3NK3cet9exception8categoryEv"></span><span id="_CPPv2NK3cet9exception8categoryEv"></span><span id="cet::exception::categoryC"></span><span class="target" id="classcet_1_1exception_1a0708815109c18f203dda46b9d880a8ed"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">category</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3cet9exception8categoryEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3cet9exception7historyEv">
+<span id="_CPPv3NK3cet9exception7historyEv"></span><span id="_CPPv2NK3cet9exception7historyEv"></span><span id="cet::exception::historyC"></span><span class="target" id="classcet_1_1exception_1a2b11a5680bd0a3a25e976f90767105d2"></span><a class="reference internal" href="#_CPPv4N3cet9exception12CategoryListE" title="cet::exception::CategoryList"><span class="n"><span class="pre">CategoryList</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">history</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3cet9exception7historyEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3cet9exception10root_causeEv">
+<span id="_CPPv3NK3cet9exception10root_causeEv"></span><span id="_CPPv2NK3cet9exception10root_causeEv"></span><span id="cet::exception::root_causeC"></span><span class="target" id="classcet_1_1exception_1a7f400d75f35a3a50ec643c5dc84fc81b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">root_cause</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3cet9exception10root_causeEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception6appendERK9exception">
+<span id="_CPPv3N3cet9exception6appendERK9exception"></span><span id="_CPPv2N3cet9exception6appendERK9exception"></span><span id="cet::exception::append__exceptionCR"></span><span class="target" id="classcet_1_1exception_1ad59ad0d070a0cb30019f3bdc11b3b45b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3cet9exceptionE" title="cet::exception"><span class="n"><span class="pre">exception</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">another</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception6appendERK9exception" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception6appendERKNSt6stringE">
+<span id="_CPPv3N3cet9exception6appendERKNSt6stringE"></span><span id="_CPPv2N3cet9exception6appendERKNSt6stringE"></span><span id="cet::exception::append__ssCR"></span><span class="target" id="classcet_1_1exception_1a2665f1ddd49ccee1ef68f28b978ef01b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">more_information</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception6appendERKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception6appendEA_Kc">
+<span id="_CPPv3N3cet9exception6appendEA_Kc"></span><span id="_CPPv2N3cet9exception6appendEA_Kc"></span><span id="cet::exception::append__cCA"></span><span class="target" id="classcet_1_1exception_1ada2790bbd3fc8e0bec59d8d6c4f61802"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">more_information</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception6appendEA_Kc" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception6appendEFRNSt7ostreamERNSt7ostreamEE">
+<span id="_CPPv3N3cet9exception6appendEFRNSt7ostreamERNSt7ostreamEE"></span><span id="_CPPv2N3cet9exception6appendEFRNSt7ostreamERNSt7ostreamEE"></span><span class="target" id="classcet_1_1exception_1a02e53916dbcc47d0758bc2da041bfe51"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception6appendEFRNSt7ostreamERNSt7ostreamEE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception6appendEFRNSt8ios_baseERNSt8ios_baseEE">
+<span id="_CPPv3N3cet9exception6appendEFRNSt8ios_baseERNSt8ios_baseEE"></span><span id="_CPPv2N3cet9exception6appendEFRNSt8ios_baseERNSt8ios_baseEE"></span><span class="target" id="classcet_1_1exception_1af3a9073dfca6ea992a4a06ca5c02a72d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ios_base</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ios_base</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet9exception6appendEFRNSt8ios_baseERNSt8ios_baseEE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_N6detail10StreamableEEN3cet9exception6appendEvRK1T">
+<span id="_CPPv3I_N6detail10StreamableEEN3cet9exception6appendERK1T"></span><span id="_CPPv2I_N6detail10StreamableEEN3cet9exception6appendERK1T"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3cet6detailE" title="cet::detail"><span class="n"><span class="pre">detail</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Streamable</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classcet_1_1exception_1aec9e9e5fc639f4ae676b4123e129a768"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">append</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I_N6detail10StreamableEEN3cet9exception6appendEvRK1T" title="cet::exception::append::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">more_information</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_N6detail10StreamableEEN3cet9exception6appendEvRK1T" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception4ost_E">
+<span id="_CPPv3N3cet9exception4ost_E"></span><span id="_CPPv2N3cet9exception4ost_E"></span><span id="cet::exception::ost___std::ostringstream"></span><span class="target" id="classcet_1_1exception_1ab3c0f825210b3ce5a91b50dbbf974185"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostringstream</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ost_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N3cet9exception4ost_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception9category_E">
+<span id="_CPPv3N3cet9exception9category_E"></span><span id="_CPPv2N3cet9exception9category_E"></span><span id="cet::exception::category___CategoryList"></span><span class="target" id="classcet_1_1exception_1ab8a0a704647cf5bb30df0ada567aded7"></span><a class="reference internal" href="#_CPPv4N3cet9exception12CategoryListE" title="cet::exception::CategoryList"><span class="n"><span class="pre">CategoryList</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">category_</span></span></span><a class="headerlink" href="#_CPPv4N3cet9exception9category_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet9exception5what_E">
+<span id="_CPPv3N3cet9exception5what_E"></span><span id="_CPPv2N3cet9exception5what_E"></span><span id="cet::exception::what___ss"></span><span class="target" id="classcet_1_1exception_1a7c3f600fe770f14d9f3284116cb92c73"></span><span class="k"><span class="pre">mutable</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">what_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N3cet9exception5what_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet6detailE">
+<span id="_CPPv3N3cet6detailE"></span><span id="_CPPv2N3cet6detailE"></span><span id="cet::detail"></span><span class="target" id="namespacecet_1_1detail"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">detail</span></span></span><a class="headerlink" href="#_CPPv4N3cet6detailE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp">
+<span class="target" id="namespacecet"></span><span class="k"><span class="pre">namespace</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cet</span></span></span><br /></dt>
+<dd><dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE">
+<span id="_CPPv3I0_NSt6stringEEN3cet15coded_exceptionE"></span><span id="_CPPv2I0_NSt6stringEEN3cet15coded_exceptionE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Code</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">translate</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classcet_1_1coded__exception"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">coded_exception</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv43cet" title="cet"><span class="n"><span class="pre">cet</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N3cet9exceptionE" title="cet::exception"><span class="n"><span class="pre">exception</span></span></a><a class="headerlink" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;coded_exception.h&gt;</em></div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet15coded_exception15coded_exceptionE4Code">
+<span id="_CPPv3N3cet15coded_exception15coded_exceptionE4Code"></span><span id="_CPPv2N3cet15coded_exception15coded_exceptionE4Code"></span><span id="cet::coded_exception::coded_exception__Code"></span><span class="target" id="classcet_1_1coded__exception_1aeffd509238b6a6f248394a4d7b2d9ac0"></span><span class="k"><span class="pre">explicit</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">coded_exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE" title="cet::coded_exception::Code"><span class="n"><span class="pre">Code</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet15coded_exception15coded_exceptionE4Code" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringE">
+<span id="_CPPv3N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringE"></span><span id="_CPPv2N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringE"></span><span id="cet::coded_exception::coded_exception__Code.ssCR"></span><span class="target" id="classcet_1_1coded__exception_1aa67c66939824c69817c201b36ee068ea"></span><span class="sig-name descname"><span class="n"><span class="pre">coded_exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE" title="cet::coded_exception::Code"><span class="n"><span class="pre">Code</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">m</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringERK9exception">
+<span id="_CPPv3N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringERK9exception"></span><span id="_CPPv2N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringERK9exception"></span><span id="cet::coded_exception::coded_exception__Code.ssCR.exceptionCR"></span><span class="target" id="classcet_1_1coded__exception_1a47fb5fbaca7715527deda72e10e3b29c"></span><span class="sig-name descname"><span class="n"><span class="pre">coded_exception</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE" title="cet::coded_exception::Code"><span class="n"><span class="pre">Code</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">c</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">m</span></span>, <a class="reference internal" href="#_CPPv4N3cet9exceptionE" title="cet::exception"><span class="n"><span class="pre">exception</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">e</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet15coded_exception15coded_exceptionE4CodeRKNSt6stringERK9exception" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet15coded_exceptionD0Ev">
+<span id="_CPPv3N3cet15coded_exceptionD0Ev"></span><span id="_CPPv2N3cet15coded_exceptionD0Ev"></span><span id="cet::coded_exception::~coded_exception"></span><span class="target" id="classcet_1_1coded__exception_1a6a13ec4933b30f20b6891fcc4806aceb"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~coded_exception</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">default</span></span><a class="headerlink" href="#_CPPv4N3cet15coded_exceptionD0Ev" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3cet15coded_exception12categoryCodeEv">
+<span id="_CPPv3NK3cet15coded_exception12categoryCodeEv"></span><span id="_CPPv2NK3cet15coded_exception12categoryCodeEv"></span><span id="cet::coded_exception::categoryCodeCCE"></span><span class="target" id="classcet_1_1coded__exception_1ae62aeb8dab7ece0bbd812ba64aae72b0"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE" title="cet::coded_exception::Code"><span class="n"><span class="pre">Code</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">categoryCode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3cet15coded_exception12categoryCodeEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3cet15coded_exception10returnCodeEv">
+<span id="_CPPv3NK3cet15coded_exception10returnCodeEv"></span><span id="_CPPv2NK3cet15coded_exception10returnCodeEv"></span><span id="cet::coded_exception::returnCodeCCE"></span><span class="target" id="classcet_1_1coded__exception_1ab48c1c915d80a49da9888dbd4273a06f"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">returnCode</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3cet15coded_exception10returnCodeEv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet15coded_exception12codeToStringE4Code">
+<span id="_CPPv3N3cet15coded_exception12codeToStringE4Code"></span><span id="_CPPv2N3cet15coded_exception12codeToStringE4Code"></span><span id="cet::coded_exception::codeToString__Code"></span><span class="target" id="classcet_1_1coded__exception_1a39f5814be76910d2e4ea8bee8cd6d523"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">codeToString</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE" title="cet::coded_exception::Code"><span class="n"><span class="pre">Code</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">code</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3cet15coded_exception12codeToStringE4Code" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3cet15coded_exception9category_E">
+<span id="_CPPv3N3cet15coded_exception9category_E"></span><span id="_CPPv2N3cet15coded_exception9category_E"></span><span id="cet::coded_exception::category___Code"></span><span class="target" id="classcet_1_1coded__exception_1ac1b1e9ed038c17e56e6dc2eb314b2dcc"></span><a class="reference internal" href="#_CPPv4I0_NSt6stringEEN3cet15coded_exceptionE" title="cet::coded_exception::Code"><span class="n"><span class="pre">Code</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">category_</span></span></span><a class="headerlink" href="#_CPPv4N3cet15coded_exception9category_E" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Reference Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2010–2024, Fermi Research Alliance, LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

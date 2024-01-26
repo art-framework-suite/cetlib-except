@@ -1,0 +1,18 @@
+{
+  "latest-version" : "git-develop",
+  "ordered-versions" : [ "git-develop", "latest" ],
+  "vdata-version" : 1,
+  "version-entries" : 
+  {
+    "git-develop" : 
+    {
+      "description" : "git-develop",
+      "display-name" : "git-develop"
+    },
+    "latest" : 
+    {
+      "description" : "latest",
+      "display-name" : "latest release"
+    }
+  }
+}

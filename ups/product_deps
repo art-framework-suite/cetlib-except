@@ -250,6 +250,9 @@ libdir	fq_dir	lib
 product		version		qual	flags		<table_format=2>
 catch		v3_3_2		-	only_for_build
 cetmodules	v3_23_01	-	only_for_build
+git		-c		-	optional only_for_build
+python		v3_9_15		-	optional only_for_build
+sphinx		v7_2_6		-	only_for_build
 end_product_list
 ####################################
 

@@ -1,3 +1,5 @@
+########################################################################
+# Package and function dependencies.
 find_package(Doxygen COMPONENTS dot)
 
 if (NOT Doxygen_FOUND)
@@ -5,7 +7,19 @@ if (NOT Doxygen_FOUND)
   return()
 endif()
 
-set(cetlib_except_DOXYGEN_SOURCES
+find_package(M4 REQUIRED)
+
+include(CetGenerateSphinxDocs)
+########################################################################
+
+########################################################################
+# Project-specific configuration.
+set(PROJ_AUTHORS "scisoft-team <scisoft-team@fnal.gov>")
+set(PROJ_NAME "cetlib-except")
+set(PROJ_COPYRIGHT_START 2010)
+set(PROJ_COPYRIGHT_OWNER "Fermi Research Alliance, LLC")
+
+set(PROJ_DOXYGEN_SOURCES
   ../cetlib_except/coded_exception.h
   ../cetlib_except/demangle.cc
   ../cetlib_except/demangle.h
@@ -16,6 +30,291 @@ set(cetlib_except_DOXYGEN_SOURCES
   ../cetlib_except/exception_collector.h
   ../cetlib_except/exception_message_matcher.h
 )
+
+set(PROJ_REFERENCE_CONTENT
+  api.rst
+  manual
+)
+########################################################################
+
+########################################################################
+# Project variables for external configuration.
+project_variable(SPHINX_DOC_PUBLISH_ROOT TYPE PATH
+  DOCSTRING "destination directory for published HTML documentation"
+)
+
+project_variable(SPHINX_DOC_PUBLISH_OLD_RELEASE TYPE BOOL
+  DOCSTRING "force overwrite of published documentation for a newer release of the same version"
+)
+
+project_variable(SPHINX_DOC_PUBLISH_FORCE_NUMERIC TYPE BOOL
+  DOCSTRING "force use of version rather than branch even if we're in a git repository"
+)
+
+project_variable(SPHINX_DOC_PUBLISH_VERSION_BRANCH TYPE STRING
+  DOCSTRING "specify branch name to be used in PROJ_VERSION (when applicable) instead of using git branch --show-current"
+)
+
+project_variable(SPHINX_DOC_EXTRA_ARGS TYPE STRING
+  DOCSTRING "extra arguments to sphinx-build")
+foreach (fmt html man)
+  project_variable(SPHINX_DOC_${fmt}_EXTRA_ARGS TYPE STRING
+    DOCSTRING "extra arguments to sphinx-build for output format ${fmt}")
+endforeach()
+########################################################################
+
+########################################################################
+# Variables and functions to aid with multi-form documentation
+# generation (version-specific and multi-version with landing page).
+
+# Variables (used by functions below).
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/common-conf.py.in" COMMON_CONF)
+set(LANDING_TOP "${CMAKE_CURRENT_SOURCE_DIR}/landing-top.rst")
+set(LANDING_REF "${CMAKE_CURRENT_SOURCE_DIR}/landing-reference.rst")
+set(LANDING_BOTTOM "${CMAKE_CURRENT_SOURCE_DIR}/landing-bottom.rst")
+set(REF_PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/reference-programs.rst")
+set(REF_API "${CMAKE_CURRENT_SOURCE_DIR}/reference-api.rst")
+
+# Set Sphinx verbosity-related options based on current CMake reporting
+# level.
+set(verbose_levels VERBOSE DEBUG TRACE)
+set(quiet_levels ERROR WARNING NOTICE STATUS)
+if (NOT CMAKE_MESSAGE_LOG_LEVEL OR CMAKE_MESSAGE_LOG_LEVEL IN_LIST quiet_levels)
+  set(qv_arg QUIET)
+elseif (CMAKE_MESSAGE_LOG_LEVEL IN_LIST verbose_levels)
+  list(FIND verbose_levels ${CMAKE_MESSAGE_LOG_LEVEL} default_verbosity)
+  math(EXPR verbosity ${default_verbosity} + 1)
+  set(qv_arg VERBOSITY ${default_verbosity})
+endif()
+
+# Functions.
+function(_generate_reference)
+  set(source_root "${CMAKE_CURRENT_BINARY_DIR}/gen/install")
+  set(doc_root "${source_root}/doc")
+  file(MAKE_DIRECTORY "${doc_root}/reference")
+  cet_copy("${CMAKE_CURRENT_SOURCE_DIR}/prolog.rst"
+    DESTINATION "${doc_root}")
+  _symlink_sourcedirs_to("${source_root}")
+  _symlink_reference_to("${doc_root}/reference")
+
+  add_custom_command(OUTPUT "${doc_root}/reference/index.rst"
+    COMMAND M4::M4
+    -DLANDING_TOP="${LANDING_TOP}"
+    -DREF_PROGRAMS="${REF_PROGRAMS}"
+    -DREF_API="${REF_API}"
+    -DLANDING_BOTTOM="${LANDING_BOTTOM}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/reference-index.rst.m4"
+    > "${doc_root}/reference/index.rst"
+    DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/reference-index.rst.m4"
+    "${LANDING_TOP}"
+    "${REF_PROGRAMS}"
+    "${REF_API}"
+    "${LANDING_BOTTOM}"
+    VERBATIM
+    COMMENT "Generating ${doc_root}/reference/index.rst with m4"
+  )
+
+  # Generate documentation for installation with this package.
+  file(READ "${CMAKE_CURRENT_SOURCE_DIR}/reference-conf.py.in" ref_conf)
+  string(CONFIGURE "\
+${COMMON_CONF}
+
+${ref_conf}
+" ref_conf @ONLY ESCAPE_QUOTES)
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/conf.py" "${ref_conf}")
+
+  cet_generate_sphinx_docs(${qv_arg}
+    NITPICKY
+    OUTPUT_FORMATS html
+    SOURCE_DIR "${doc_root}/reference"
+    CONF_DIR "${CMAKE_CURRENT_BINARY_DIR}"
+    EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_EXTRA_ARGS}
+    html_EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_html_EXTRA_ARGS}
+    DEPENDS "${doc_root}/reference/index.rst"
+    "${doc_root}/prolog.rst"
+    "${CMAKE_CURRENT_BINARY_DIR}/${CETMODULES_CURRENT_PROJECT_NAME}_doxygen_xml.stamp"
+    TARGETS_VAR reference_html_target
+  )
+
+  set(WANT_UNIX_MAN_PAGES "True")
+  file(READ "${CMAKE_CURRENT_SOURCE_DIR}/reference-conf.py.in" ref_conf)
+  string(CONFIGURE "\
+${COMMON_CONF}
+
+${ref_conf}
+" ref_conf @ONLY ESCAPE_QUOTES)
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/man-conf/conf.py" "${ref_conf}")
+  cet_generate_sphinx_docs(${qv_arg}
+    NITPICKY
+    OUTPUT_FORMATS man
+    SOURCE_DIR "${doc_root}/reference"
+    CONF_DIR "${CMAKE_CURRENT_BINARY_DIR}/man-conf"
+    EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_EXTRA_ARGS}
+    man_EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_man_EXTRA_ARGS}
+    DEPENDS
+    "${doc_root}/reference/index.rst"
+    "${doc_root}/prolog.rst"
+    "${CMAKE_CURRENT_BINARY_DIR}/${CETMODULES_CURRENT_PROJECT_NAME}_doxygen_xml.stamp"
+    TARGETS_VAR reference_man_target
+  )
+    add_custom_target(doc-cetmodules-reference)
+    add_dependencies(doc-cetmodules-reference ${reference_html_target} ${reference_man_target})
+endfunction()
+
+function(_publish_to_root)
+  set(WANT_VERSION_SWITCH "True")
+
+  set(source_root "${CMAKE_CURRENT_BINARY_DIR}/gen/publish")
+  set(doc_root "${source_root}/doc")
+  file(MAKE_DIRECTORY
+    "${doc_root}/landing"
+    "${doc_root}/reference"
+  )
+  cet_copy("${CMAKE_CURRENT_SOURCE_DIR}/prolog.rst"
+    DESTINATION "${doc_root}")
+  _symlink_sourcedirs_to("${source_root}")
+  _symlink_reference_to("${doc_root}/reference")
+  add_custom_command(OUTPUT "${doc_root}/reference/index.rst"
+    COMMAND M4::M4
+    -DREF_PROGRAMS="${REF_PROGRAMS}"
+    -DREF_API="${REF_API}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/publish-reference-index.rst.m4"
+    > "${doc_root}/reference/index.rst"
+    DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/publish-reference-index.rst.m4"
+    "${REF_PROGRAMS}"
+    "${REF_API}"
+    VERBATIM
+    COMMENT "Generating ${doc_root}/reference/index.rst with m4"
+  )
+
+  file(READ "${CMAKE_CURRENT_SOURCE_DIR}/reference-conf.py.in" ref_conf)
+  string(CONFIGURE "\
+${COMMON_CONF}
+
+${ref_conf}
+" ref_conf @ONLY ESCAPE_QUOTES)
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/reference/conf.py" "${ref_conf}")
+  file(REAL_PATH "${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_ROOT}"
+    ${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_ROOT
+    BASE_DIRECTORY ${PROJECT_BINARY_DIR} EXPAND_TILDE)
+  if (${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_OLD_RELEASE)
+    set(PUBLISH_OLD_RELEASE PUBLISH_OLD_RELEASE)
+  else()
+    unset(PUBLISH_OLD_RELEASE)
+  endif()
+  cet_publish_sphinx_html(
+    "${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_ROOT}"
+    ${PROJ_VERSION}
+    ${PUBLISH_OLD_RELEASE}
+    ${qv_arg}
+    NITPICKY
+    SOURCE_DIR "${doc_root}/reference"
+    CONF_DIR "${CMAKE_CURRENT_BINARY_DIR}/reference"
+    EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_EXTRA_ARGS}
+    html_EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_html_EXTRA_ARGS}
+    DEPENDS "${doc_root}/reference/index.rst"
+    "${doc_root}/prolog.rst"
+    "${CMAKE_CURRENT_BINARY_DIR}/${CETMODULES_CURRENT_PROJECT_NAME}_doxygen_xml.stamp"
+    TARGETS_VAR publish_ref_target
+  )
+  add_custom_command(OUTPUT "${doc_root}/landing/index.rst"
+    COMMAND M4::M4
+    -DLANDING_TOP="${LANDING_TOP}"
+    -DLANDING_REF="${LANDING_REF}"
+    -DLANDING_BOTTOM="${LANDING_BOTTOM}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/landing-index.rst.m4"
+    > "${doc_root}/landing/index.rst"
+    DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/landing-index.rst.m4"
+    "${LANDING_TOP}"
+    "${LANDING_REF}"
+    "${LANDING_BOTTOM}"
+    VERBATIM
+    COMMENT "Generating ${doc_root}/landing/index.rst with m4"
+  )
+  file(READ "${CMAKE_CURRENT_SOURCE_DIR}/landing-conf.py.in" landing_conf)
+  string(CONFIGURE "\
+${COMMON_CONF}
+
+${landing_conf}
+" landing_conf @ONLY ESCAPE_QUOTES)
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/landing/conf.py" "${landing_conf}")
+  cet_generate_sphinx_docs(${qv_arg}
+    NITPICKY
+    TARGET_STEM publish_${CETMODULES_CURRENT_PROJECT_NAME}_landing
+    html_OUTPUT_DIR
+    "${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_ROOT}"
+    html_NO_DELETE_OUTPUT_DIR
+    SOURCE_DIR "${doc_root}/landing"
+    CONF_DIR "${CMAKE_CURRENT_BINARY_DIR}/landing"
+    EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_EXTRA_ARGS}
+    html_EXTRA_ARGS ${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_html_EXTRA_ARGS}
+    DEPENDS "${doc_root}/landing/index.rst" "${doc_root}/prolog.rst"
+    TARGETS_VAR publish_landing_target
+  )
+
+  add_custom_target(doc-cetmodules-publish)
+  add_dependencies(doc-cetmodules-publish ${publish_ref_target} ${publish_landing_target})
+endfunction()
+
+# Are we going with standard version/release, or using git branch/commit
+# info?
+function(_set_version_release)
+  if (${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_FORCE_NUMERIC
+      OR NOT EXISTS ${PROJECT_SOURCE_DIR}/.git)
+    set(PROJ_VERSION ${CETMODULES_CURRENT_PROJECT_VERSION_MAJOR}.${CETMODULES_CURRENT_PROJECT_VERSION_MINOR})
+    set(PROJ_RELEASE ${CETMODULES_CURRENT_PROJECT_VERSION})
+  else()
+    if (${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_VERSION_BRANCH)
+      set(current_branch "${${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_VERSION_BRANCH}")
+    else()
+      # Try to get the current branch for the version.
+      execute_process(COMMAND git branch --show-current
+        COMMAND_ERROR_IS_FATAL ANY
+        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        OUTPUT_VARIABLE current_branch
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
+    endif()
+    set(PROJ_VERSION "git-${current_branch}")
+    # Try to get the current commit for the release.
+    execute_process(COMMAND git rev-parse --short HEAD
+      COMMAND_ERROR_IS_FATAL ANY
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+      OUTPUT_VARIABLE current_commit
+      OUTPUT_STRIP_TRAILING_WHITESPACE)
+    set(PROJ_RELEASE "${PROJ_VERSION}-${current_commit}")
+  endif()
+  set(PROJ_VERSION "${PROJ_VERSION}" PARENT_SCOPE)
+  set(PROJ_RELEASE "${PROJ_RELEASE}" PARENT_SCOPE)
+  return()
+endfunction()
+
+function(_symlink_sourcedirs_to DEST)
+  foreach(item IN ITEMS LICENSE)
+    file(CREATE_LINK
+      "${PROJECT_SOURCE_DIR}/${item}"
+      "${DEST}/${item}"
+      SYMBOLIC)
+  endforeach()
+endfunction()
+
+function(_symlink_reference_to DEST)
+  foreach(item IN LISTS PROJ_REFERENCE_CONTENT)
+    file(CREATE_LINK
+      "${PROJECT_SOURCE_DIR}/doc/reference/${item}"
+      "${DEST}/${item}"
+      SYMBOLIC)
+  endforeach()
+endfunction()
+########################################################################
+
+# Define information for substitution in conf.py.in.
+_set_version_release()
+
+set(WANT_UNIX_MAN_PAGES "False")
+set(WANT_VERSION_SWITCH "False")
 
 set(DOXYGEN_ALLOW_UNICODE_NAMES YES)
 set(DOXYGEN_BUILTIN_STL_SUPPORT YES)
@@ -34,129 +333,13 @@ set(DOXYGEN_TEMPLATE_RELATIONS YES)
 set(DOXYGEN_UML_LOOK YES)
 
 doxygen_add_docs(${CETMODULES_CURRENT_PROJECT_NAME}_doxygen_xml
-  ${${CETMODULES_CURRENT_PROJECT_NAME}_DOXYGEN_SOURCES}
-  ALL
+  ${PROJ_DOXYGEN_SOURCES}
   USE_STAMP_FILE
   COMMENT "Generate XML reference documentation with Doxygen"
 )
 
-include(CetGenerateSphinxDocs)
-
-if(NOT DEFINED SPHINX_THEME)
-    set(SPHINX_THEME default)
+if (${CETMODULES_CURRENT_PROJECT_NAME}_SPHINX_DOC_PUBLISH_ROOT)
+  _publish_to_root()
 endif()
 
-if(NOT DEFINED SPHINX_THEME_DIR)
-    set(SPHINX_THEME_DIR)
-endif()
-
-# configured documentation tools and intermediate build results
-#set(BINARY_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/_build")
-
-# Sphinx cache with pickled ReST documents
-set(SPHINX_CACHE_DIR "${CMAKE_CURRENT_BINARY_DIR}/_doctrees")
-
-# HTML output directory
-# --- doing a bit of extra work here. Why?
-#        + we want to see what directory are people putting their docs
-#          do we want them to make and environement variable for that?
-#        + once we know that this dir exists, we want to check does the
-#          product dir exist there (e.g. all_docs/cetlib_except exists)
-#          if not then we should probably make it ourselves
-#        + and then we do the same for the version being developed
-#          the goal is for the all_docs dir to look similar to scisoft
-#          in directory structure.
-
-#set(SPHINX_HTML_DIR "${CMAKE_CURRENT_BINARY_DIR}/html")
-#set(SPHINX_HTML_DIR "$ENV{MRB_TOP}/all_docs/cetlib_except")
-#set(SPHINX_HTML_DIR "$ENV{MRB_TOP}/all_docs/${PROJECT_NAME}/$ENV{}")
-#message("\n\n\n\n\n\n")
-
-set(TOP_DOCS_DIR "$ENV{MRB_TOP}/all_docs")
-
-# looking for top level dir
-if(EXISTS "${TOP_DOCS_DIR}")
-  #message("I can use exists this way. all_docs is there.")
-  set(PROJ_DOCS_DIR "${TOP_DOCS_DIR}/${PROJECT_NAME}")
-
-
-  # looking for project dir
-  if(EXISTS "${PROJ_DOCS_DIR}")
-    #message("cetlib_except dir is here")
-    string(TOUPPER ${PROJECT_NAME} ENV_PROJ_NAME)
-    set(VERSION_DOCS_DIR "${PROJ_DOCS_DIR}/$ENV{${ENV_PROJ_NAME}_VERSION}")
-    set(VERSION_NUMBER $ENV{${ENV_PROJ_NAME}_VERSION})
-    #message("looking for.. ${DUMB_TEMP_VAR}")
-    #if(EXISTS "$ENV{MRB_TOP}/all_docs/${PROJECT_NAME}/$ENV{${ENV_PROJ_NAME}_VERSION}")
-
-    if(EXISTS "${VERSION_DOCS_DIR}")
-      #set(DUMB_TEMP_VAR "$ENV{MRB_TOP}/all_docs/${PROJECT_NAME}/$ENV{${ENV_PROJ_NAME}_VERSION}")
-      #message("version dir is here")
-    else()
-      #message("You don't have a version dir")
-      add_custom_target(build_cetlib_except_version_dir ALL COMMAND
-                        ${CMAKE_COMMAND} -E make_directory
-                        ${VERSION_DOCS_DIR})
-    endif()
-  else()
-    #message("You don't have a cetlib_except dir")
-    add_custom_target(build_cetlib_except_proj_dir ALL COMMAND
-                      ${CMAKE_COMMAND} -E make_directory
-                      ${PROJ_DOCS_DIR})
-
-    # Going back through now assuming it exists !
-    #message("cetlib_except dir is here")
-    string(TOUPPER ${PROJECT_NAME} ENV_PROJ_NAME)
-    set(VERSION_DOCS_DIR "${PROJ_DOCS_DIR}/$ENV{${ENV_PROJ_NAME}_VERSION}")
-    #message("looking for.. ${DUMB_TEMP_VAR}")
-    #if(EXISTS "$ENV{MRB_TOP}/all_docs/${PROJECT_NAME}/$ENV{${ENV_PROJ_NAME}_VERSION}")
-
-    if(EXISTS "${VERSION_DOCS_DIR}")
-      #set(DUMB_TEMP_VAR "$ENV{MRB_TOP}/all_docs/${PROJECT_NAME}/$ENV{${ENV_PROJ_NAME}_VERSION}")
-      #message("version dir is here")
-    else()
-      #message("You don't have a version dir")
-      add_custom_target(build_cetlib_except_version_dir ALL COMMAND
-                        ${CMAKE_COMMAND} -E make_directory
-                        ${VERSION_DOCS_DIR})
-    endif()
-  endif()
-else()
-  message("You don't a spot to put your docs!")
-endif()
-
-
-
-#message("\n\n\n\n\n\n")
-
-set(BINARY_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}/${VERSION_NUMBER}")
-message("BINARY_BUILD_DIR: ${BINARY_BUILD_DIR}")
-set(SPHINX_HTML_DIR "${BINARY_BUILD_DIR}")
-
-
-
-
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/_static/ DESTINATION ${BINARY_BUILD_DIR}/_static)
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/_templates/ DESTINATION ${BINARY_BUILD_DIR}/_templates)
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/_extensions/ DESTINATION ${BINARY_BUILD_DIR}/_extensions)
-configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/conf.py.in"
-    "${BINARY_BUILD_DIR}/conf.py"
-    @ONLY)
-
-add_custom_target(cetlib_except_docs ALL
-  sphinx-doc::sphinx-build
-  -q -b html
-  -c "${BINARY_BUILD_DIR}"
-  -d "${SPHINX_CACHE_DIR}"
-  "${CMAKE_CURRENT_SOURCE_DIR}"
-  "${SPHINX_HTML_DIR}"
-  COMMENT "Building HTML documentation with Sphinx"
-  SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/_extensions/redmineRoles.py)
-
-# Install the built html files to an instal dir (HTML DIR)
-
-install(DIRECTORY "${BINARY_BUILD_DIR}"
-        #DESTINATION "${VERSION_DOCS_DIR}"
-        DESTINATION "${PROJ_DOCS_DIR}"
-        PATTERN "${BINARY_BUILD_DIR}/*")
+_generate_reference()

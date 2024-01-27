@@ -158,8 +158,8 @@ ${ref_conf}
     "${CMAKE_CURRENT_BINARY_DIR}/${CETMODULES_CURRENT_PROJECT_NAME}_doxygen_xml.stamp"
     TARGETS_VAR reference_man_target
   )
-    add_custom_target(doc-cetmodules-reference)
-    add_dependencies(doc-cetmodules-reference ${reference_html_target} ${reference_man_target})
+    add_custom_target(doc-${CETMODULES_CURRENT_PROJECT_NAME}-reference)
+    add_dependencies(doc-${CETMODULES_CURRENT_PROJECT_NAME}-reference ${reference_html_target} ${reference_man_target})
 endfunction()
 
 function(_publish_to_root)
@@ -255,8 +255,8 @@ ${landing_conf}
     TARGETS_VAR publish_landing_target
   )
 
-  add_custom_target(doc-cetmodules-publish)
-  add_dependencies(doc-cetmodules-publish ${publish_ref_target} ${publish_landing_target})
+  add_custom_target(doc-${CETMODULES_CURRENT_PROJECT_NAME}-publish)
+  add_dependencies(doc-${CETMODULES_CURRENT_PROJECT_NAME}-publish ${publish_ref_target} ${publish_landing_target})
 endfunction()
 
 # Are we going with standard version/release, or using git branch/commit

@@ -1,29 +1,36 @@
 {% extends "!layout.html" %}
-{% block rootrellink %}
-  <li>
-    <a href="{{ project_github_url }}">
-      <img src="{{ pathto('_static/FNALssi.png', 1) }}" alt=""
-           style="vertical-align: middle; margin-top: -2px" />
-      Cetmodules
-    </a>{{ reldelim1 }}
-  </li>
-  {%- if versionswitch is defined %}
-  <li>
-    <a href="{{ content_root }}../">{{ project }} Documentation</a>{{ reldelim1 }}
-  </li>
-  {%- endif %}
-  <li>
-    {%- if versionswitch is defined %}
-    <span class="version_switch">{{ release }}</span>
-    <a href="{{ pathto(master_doc) }}">{% trans %}Reference{% endtrans %}</a>{{ reldelim1 }}
-    {%- else %}
-    <a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>{{ reldelim1 }}
-    {%- endif %}
-  </li>
-{% endblock %}
+{%- block sidebartitle %}
 
-{%- block relbar1 %}
-{{ super() }}
+{# the logo helper function was removed in Sphinx 6 and deprecated since Sphinx 4 #}
+{# the master_doc variable was renamed to root_doc in Sphinx 4 (master_doc still exists in later Sphinx versions) #}
+{%- set _logo_url = logo_url|default(pathto('_static/' + (logo or ""), 1)) %}
+{%- set _root_doc = root_doc|default(master_doc) %}
+
+{# Thunk to accommodate FNAL doc version management #}
+<a href="{{ content_root }}../"{% if not theme_logo_only %} class="icon icon-home"{% endif %}>
+  {% if not theme_logo_only %}{{ project }}{% endif %}
+  {%- if logo or logo_url %}
+    <img src="{{ _logo_url }}" class="logo" alt="{{ _('Logo') }}"/>
+  {%- endif %}
+</a>
+
+{%- if theme_display_version %}
+  {%- set nav_version = version %}
+  {%- if READTHEDOCS and current_version %}
+    {%- set nav_version = current_version %}
+  {%- endif %}
+  {%- if nav_version %}
+    <div class="version">
+      {{ nav_version }}
+    </div>
+  {%- endif %}
+{%- endif %}
+
+{%- include "searchbox.html" %}
+
+{%- endblock %}
+
+{%- block body %}
 {% if versionswitch is defined %}
     <div class="outdated">
       This documents an old version of {{ project }}.
@@ -33,12 +40,6 @@
       <span class="version_switch_note"></span>
     </div>
 {% endif %}
-{% endblock %}
-
-{% block extrahead %}
-  {% if versionswitch is defined %}
-  <script type="text/javascript" src="{{ pathto('../_static/version_switch.js', 1) }}"></script>
-  {% endif %}
 {{ super() }}
 {% endblock %}
 

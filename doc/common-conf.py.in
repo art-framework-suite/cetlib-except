@@ -87,6 +87,7 @@ rst_prolog = f"""
 ########################################################################
 # HTML configuration.
 html_favicon = "@CMAKE_CURRENT_SOURCE_DIR@/_static/FNALssi-favicon.ico"
+html_logo = "@CMAKE_CURRENT_SOURCE_DIR@/_static/FNALssi.png"
 
 html_show_sourcelink = True
 html_style="FNALssi-cpp.css"
@@ -160,3 +161,5 @@ versionswitch = @WANT_VERSION_SWITCH@
 def setup(app):
     app.add_config_value("project_github_url", None, "env")
     app.add_config_value("versionswitch", False, "env")
+    if versionswitch:
+        app.add_js_file("version_switch.js")

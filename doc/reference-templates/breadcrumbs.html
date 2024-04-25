@@ -1,0 +1,20 @@
+{% extends "!breadcrumbs.html" %}
+{% block breadcrumbs %}
+  {%- if versionswitch is defined %}
+  <li>
+    <a href="{{ content_root }}../" class="icon icon-home"></a>
+  </li>
+  {%- endif %}
+  <li{%- if versionswitch is defined %} class="breadcrumb-item"{%- endif %}>
+    {%- if versionswitch is defined %}
+    <span class="version_switch">{{ release }}</span>
+    <a href="{{ pathto(master_doc) }}">{% trans %}Reference{% endtrans %}</a>
+    {%- else %}
+    <a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>
+    {%- endif %}
+  </li>
+    {%- for doc in parents %}
+      <li class="breadcrumb-item"><a href="{{ doc.link|e }}">{{ doc.title }}</a></li>
+    {%- endfor %}
+  <li class="breadcrumb-item active">{{ title }}</li>
+{% endblock %}

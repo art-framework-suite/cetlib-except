@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18.2 FATAL_ERROR)
 
 find_package(cetmodules 2.13.00 REQUIRED)
-project(cetlib_except VERSION 1.09.01 LANGUAGES CXX)
+project(cetlib_except VERSION 1.10.00 LANGUAGES CXX)
 
 include(CetCMakeEnv)
 cet_cmake_env()
@@ -35,11 +35,10 @@ cet_report_compiler_flags(REPORT_THRESHOLD VERBOSE)
 # ----------------------------------------------------------------------
 # Describe source tree layout:
 
-add_subdirectory( ${PROJECT_NAME} )  # source code
-
-# ----------------------------------------------------------------------
-# Packaging utility
-
+add_subdirectory(${PROJECT_NAME})  # source code
+if (BUILD_DOCS)
+  add_subdirectory(doc)
+endif()
 
 #
 # ======================================================================

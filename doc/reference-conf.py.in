@@ -1,0 +1,50 @@
+########################################################################
+# Reference settings.
+
+# The full version, including alpha/beta/rc tags
+release = "@PROJ_RELEASE@"
+
+# Major.minor
+version = "@PROJ_VERSION@"
+
+# HTML tweaks.
+html_title = "{0} {1} Reference".format(project, release)
+html_short_title = "{0} Reference".format(release)
+
+# References-specific extensions.
+if versionswitch:
+    extensions.append("sphinxcontrib.jquery")
+
+want_man = @WANT_UNIX_MAN_PAGES@
+man_pages = [] # Populated below.
+
+if want_man:
+    # -- U**X man-page output ----------------------------------------------------
+    cmake_manuals = sorted(glob.glob(r"@CMAKE_CURRENT_SOURCE_DIR@/reference/manual/*.rst"))
+    cmake_manual_description = re.compile("^\.\. cmake-manual-description:(.*)$")
+    man_make_section_directory = True
+    man_show_urls = False
+    for fpath in cmake_manuals:
+        try:
+            name, sec, rst = os.path.basename(fpath).rsplit(".", 2)
+            desc = None
+            f = open(fpath, "r")
+            for l in f:
+                m = cmake_manual_description.match(l)
+                if m:
+                    desc = m.group(1).strip()
+                    break
+                f.close()
+            if desc:
+                man_pages.append(("manual/%s.%s" % (name, sec),
+                                  name, desc, [], int(sec)))
+            else:
+                sys.stderr.write(f"ERROR: No cmake-manual-description in '{fpath}'\n")
+        except Exception as e:
+            raise
+else:
+    extensions.append("sphinx_design") # Breaks man page generation.
+    sd_add_bootstrap_css = False
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ["@CMAKE_CURRENT_SOURCE_DIR@/reference-templates"]

@@ -87,7 +87,7 @@
 #>  define_pythonpath
 ####################################
 parent		cetlib_except
-defaultqual	e20
+defaultqual	e28
 ####################################
 
 ####################################
@@ -308,16 +308,6 @@ end_product_list
 #
 ####################################
 qualifier	catch	notes
-c14:debug	c14
-c14:prof	c14
-c15:debug	c15
-c15:prof	c15
-e20:debug	e20
-e20:prof	e20
-e26:debug	e26
-e26:prof	e26
-e27:debug	e27
-e27:prof	e27
 e28:debug	e28
 e28:prof	e28
 end_qualifier_list

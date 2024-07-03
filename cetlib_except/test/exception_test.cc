@@ -110,10 +110,14 @@ main()
     auto wanted_categories = {
       std::string("Outer"), std::string("Inner"), std::string("Innermost")};
     ensure_equal_to(wanted_categories.size(), e1.history().size());
-    std::equal(wanted_categories.begin(),
-               wanted_categories.end(),
-               e1.history().begin(),
-               ensure_equal_to);
+    bool are_equal = std::equal(wanted_categories.begin(),
+                                wanted_categories.end(),
+                                e1.history().begin(),
+                                ensure_equal_to);
+    if (!are_equal) {
+      throw std::runtime_error(
+        "wanted categories are not equal to the e1 history");
+    }
     ensure_equal_to(e1.root_cause(), std::string("Innermost"));
     ensure_equal_to(e2.root_cause(), std::string("Innermost"));
   }

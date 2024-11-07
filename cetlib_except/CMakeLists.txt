@@ -5,6 +5,8 @@
 # ======================================================================
 
 include(CetMake)
+include(InstallHeaders)
+include(InstallSource)
 
 # If someone is using cetlib_except::Catch2Matchers, they will be
 # calling (cet)?find_package(Catch2) themselves.

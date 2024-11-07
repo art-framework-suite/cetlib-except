@@ -4,6 +4,8 @@ find_package(cetmodules 2.13.00 REQUIRED)
 project(cetlib_except VERSION 1.10.00 LANGUAGES CXX)
 
 include(CetCMakeEnv)
+include(SetCompilerFlags)
+
 cet_cmake_env()
 
 cet_set_compiler_flags(DIAGS VIGILANT

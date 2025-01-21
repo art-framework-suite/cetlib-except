@@ -5,6 +5,7 @@ project(cetlib_except VERSION 1.10.00 LANGUAGES CXX)
 
 include(CetCMakeEnv)
 include(SetCompilerFlags)
+include(CetCMakeConfig)
 
 cet_cmake_env()
 
